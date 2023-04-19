@@ -1,0 +1,7 @@
+name: test
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+     - uses: sam9111/markdown-accessibility-helper@v1.0.0
