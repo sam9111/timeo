@@ -1,18 +1,17 @@
-name: My GitHub Action
+name: My Workflow
 
 on:
   push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+    branches:
+      - main
 
 jobs:
-  my-job:
+  build:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: My action
-        run: |
-          echo "Repository URL: ${{ github.event.repository.clone_url }}"
-          echo "Event type: ${{ github.event_name }}"
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Run Markdown Accessibility Helper
+      uses: sam9111/markdown-accessibility-helper@v1.0.0
