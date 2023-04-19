@@ -1,8 +1,6 @@
 jobs:
-
-suggest_alt_text:
-
-steps:
-  - name: Markdown Accessibility Helper
-  uses: sam9111/markdown-accessibility-helper@v1.0.0
+  suggest_alt_text:
+    steps:
+      - name: Markdown Accessibility Helper
+      uses: sam9111/markdown-accessibility-helper@v1.0.0
 
