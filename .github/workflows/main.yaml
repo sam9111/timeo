@@ -4,4 +4,5 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+     - uses: actions/checkout@v2
      - uses: sam9111/markdown-accessibility-helper@v1.0.0
