@@ -1,60 +1,53 @@
-import sys
-import arrow
 import pyperclip
+import arrow
 import dateparser
-import pytz
-from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel
-from PyQt5.QtCore import QTimer
+import PySimpleGUI as sg
 
 
-class HighlightConverter(QMainWindow):
-    def __init__(self):
-        super().__init__()
+def main():
+    sg.theme('Default 1')
 
-        self.setWindowTitle('Highlight Converter')
+    layout = [[sg.Text('Highlight Converter', font=('Helvetica', 18))],
+              [sg.Text('Converted time: ', font=('Helvetica', 14)), sg.Text('', size=(40, 1), key='-TIME-')],
+              [sg.Button('Exit')]]
 
-        self.label = QLabel(self)
-        self.label.setGeometry(50, 50, 300, 50)
-        self.label.setStyleSheet('font-size: 18px;')
+    window = sg.Window('Highlight Converter', layout, icon='icon.ico')
 
-        self.timer = QTimer(self)
-        self.timer.timeout.connect(self.check_clipboard)
-        self.timer.start(1000)
+    while True:
+        event, values = window.read(timeout=1000)
 
-        self.last_text = None
-
-    def check_clipboard(self):
         # Check the clipboard for new text
         new_text = pyperclip.paste()
 
         # If the text is different from the last time we checked, process it
-        if new_text != self.last_text:
-            self.last_text = new_text
-            self.convert_text()
+        if new_text != values['-LAST-']:
+            window['-LAST-'].update(new_text)
+            convert_text(new_text, window)
 
-    def convert_text(self):
-        # Get the highlighted text from the clipboard
-        highlighted_text = pyperclip.paste()
+        if event in (sg.WIN_CLOSED, 'Exit'):
+            break
 
-        # Use dateparser to extract the date and time from the text
-        date = dateparser.parse(highlighted_text)
+    window.close()
 
 
-        # If dateparser found a valid date, convert it to the user's local timezone
-        if date:
-            print(date.tzname())
-            local_timezone = arrow.now().tzinfo
-            local_time = arrow.get(date).to(local_timezone)
-            formatted_time = local_time.strftime('%Y-%m-%d %H:%M:%S %Z')
+def convert_text(highlighted_text, window):
+    # Use dateparser to extract the date and time from the text
+    date = dateparser.parse(highlighted_text)
 
-            self.label.setText(f'Converted time: {formatted_time}')
+    # If dateparser found a valid date, convert it to the user's local timezone
+    if date:
+        local_timezone = arrow.now().tzinfo
+        if date.tzname() is None:
+            date = date.replace(tzinfo=local_timezone)
 
-        else:
-            self.label.setText('No time found in highlighted text')
+        local_time = arrow.get(date).to(local_timezone)
+        formatted_time = local_time.format('YYYY-MM-DD HH:mm:ss ZZ')
+
+        window['-TIME-'].update(formatted_time)
+
+    else:
+        window['-TIME-'].update('No time found in highlighted text')
 
 
 if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    converter = HighlightConverter()
-    converter.show()
-    sys.exit(app.exec_())
+    main()
