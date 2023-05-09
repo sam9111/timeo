@@ -14,5 +14,5 @@ jobs:
       - name: Markdown Accessibility Helper
         uses: sam9111/markdown-accessibility-helper@v1.0.0
         with:
-          GITHUB_ACTOR: ${{ github.actor }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          github_actor: ${{ github.actor }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
