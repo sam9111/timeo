@@ -39,7 +39,6 @@ class HighlightConverter(QMainWindow):
         # Use dateparser to extract the date and time from the text
         date = dateparser.parse(highlighted_text)
 
-        print
 
         # If dateparser found a valid date, convert it to the user's local timezone
         if date:
