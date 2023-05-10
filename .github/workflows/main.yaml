@@ -13,5 +13,3 @@ jobs:
 
       - name: Markdown Accessibility
         uses: sam9111/markdown-accessibility-helper@v1.0.3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
