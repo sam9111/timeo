@@ -1,7 +1,11 @@
 name: My Workflow
 
 on:
-  workflow_dispatch:
+  push:
+    paths:
+      - "**.md"
+    branches:
+      - master
 
 jobs:
   build:
