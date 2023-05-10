@@ -6,12 +6,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
       - name: Markdown Accessibility
-        uses: sam9111/markdown-accessibility-helper@v1.0.4
+        uses: sam9111/markdown-accessibility-helper@v1.0.5
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
