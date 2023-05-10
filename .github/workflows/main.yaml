@@ -2,10 +2,10 @@ name: My Workflow
 
 on:
   push:
+    branches:
+      - main
     paths:
       - "**.md"
-    branches:
-      - master
 
 jobs:
   build:
