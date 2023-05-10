@@ -9,5 +9,3 @@ jobs:
     steps:
       - name: Markdown Accessibility
         uses: sam9111/markdown-accessibility-helper@main
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
