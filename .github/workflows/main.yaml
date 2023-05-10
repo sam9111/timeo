@@ -8,6 +8,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Markdown Accessibility
-        uses: sam9111/markdown-accessibility-helper@v1.0.5
+        uses: sam9111/markdown-accessibility-helper@v1.0.6
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
