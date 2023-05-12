@@ -6,7 +6,7 @@ Image from the web:
 
 Image from the repo:
 
-![](https://github.com/sam9111/markdown-accessibility-helper/blob/main/puppy.jpeg?raw=true)
+![](https://github.com/sam9111/timeo/blob/main/puppy.jpeg?raw=true)
 
 Image declared in HTML:
 
