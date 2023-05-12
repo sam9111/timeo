@@ -1,0 +1,11 @@
+name: My Workflow
+
+# Runs only when triggered manually
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
