@@ -8,29 +8,25 @@ import moment from "moment-timezone";
 function App() {
   // get local time
   const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-  const abbrTimezone = moment().tz(timezone).zoneAbbr();
 
-  const localTime = new Date().toLocaleString() + " " + abbrTimezone;
+  const localTime = moment(new Date()).tz(timezone).format("llll z");
 
   const [clipboardText, setClipboardText] = useState("");
   const [result, setResult] = useState(localTime);
 
-  const [error, setError] = useState("");
-
   function convertDateToTimezone(input: string) {
     if (input === "") {
       setResult(localTime);
-      return;
+
+      return false;
     }
 
     const convertedDate = chrono.parseDate(input, timezone);
     if (convertedDate) {
-      setResult(convertedDate.toLocaleString() + " " + abbrTimezone);
+      setResult(moment(convertedDate).tz(timezone).format("llll z"));
       setClipboardText(input);
-      setError("");
+
       return true;
-    } else {
-      setError("Invalid date");
     }
   }
 
@@ -53,28 +49,43 @@ function App() {
   }, []);
 
   return (
-    <div className="h-screen mx-auto p-8 flex flex-col bg-gradient-to-b from-sky-300 to-sky-100 ">
-      <div className="text-4xl font-semibold text-center text-white">timeo</div>
-      <div className="space-y-8  flex flex-col my-auto bg-white rounded-xl shadow-xl p-8">
-        <div className="text-9xl  justify-between items-center mx-auto">🌤️</div>
+    <div className=" items-center mx-auto  p-8  bg-gradient-to-b from-sky-300 to-sky-50  space-y-8 min-h-screen ">
+      <div className="flex justify-between items-center space-x-8 mx-auto">
+        <div className="text-4xl font-semibold  text-white">timeo</div>
+        <svg
+          className="w-6 h-6 text-white"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 17 14"
+        >
+          <path
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M1 1h15M1 7h15M1 13h15"
+          />
+        </svg>
+      </div>
+      <div className="flex justify-between items-center space-x-8 mx-auto">
+        <div className="text-8xl text-center ">🌤️</div>
 
-        <div className=" text-2xl  text-center">{result}</div>
-        <TextInput
-          sizing="xl"
-          onChange={(e) => {
-            setError("");
-            setClipboardText(e.target.value);
-            convertDateToTimezone(e.target.value);
-          }}
-          value={clipboardText}
-        />
-        {error != "" ? (
-          <div className="text-red-500 text-center text-sm">{error}</div>
-        ) : (
-          <span className="text-sm text-gray-400">
-            Highlight a date and press Ctrl + C or type a date above
-          </span>
-        )}
+        <div className=" text-2xl font-medium  ">{result}</div>
+      </div>
+
+      <TextInput
+        sizing="xl"
+        width="w-full"
+        onChange={(e) => {
+          setClipboardText(e.target.value);
+          convertDateToTimezone(e.target.value);
+        }}
+        value={clipboardText}
+      />
+
+      <div className="text-sm text-gray-400">
+        Highlight a date and press Cmd/Ctrl + C or type in a date above
       </div>
     </div>
   );

@@ -41,10 +41,10 @@
     "windows": [
       {
         "fullscreen": false,
-        "resizable": false,
+        "resizable": true,
         "title": "timeo",
-        "width": 400,
-        "height": 600
+        "width": 350,
+        "height": 450
       }
     ]
   }
