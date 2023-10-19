@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-import { readText, writeText } from "@tauri-apps/api/clipboard";
+import { readText} from "@tauri-apps/api/clipboard";
 import * as chrono from "chrono-node";
 import {
   TextInput,
-  Button,
   Modal,
   DarkThemeToggle,
   Flowbite,
@@ -23,7 +22,9 @@ function App() {
       setResult(localTime);
     }
 
-    const convertedDate = chrono.parseDate(input, timezone);
+    const convertedDate = chrono.parseDate(input, {
+      timezone: timezone,
+    });
     if (convertedDate) {
       setResult(moment(convertedDate).tz(timezone).format("llll z"));
       setClipboardText(input);
@@ -60,6 +61,7 @@ function App() {
             onClick={() => props.setOpenModal("dismissible")}
             className="bg-transparent dark:bg-transparent"
           >
+            ""
             <svg
               className="w-4 h-4 text-white"
               aria-hidden="true"
