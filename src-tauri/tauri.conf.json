@@ -13,10 +13,7 @@
   "tauri": {
     "allowlist": {
       "all": false,
-      "shell": {
-        "all": true,
-        "execute": true
-      },
+
       "clipboard": {
         "all": true,
         "writeText": true,

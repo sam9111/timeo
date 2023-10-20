@@ -3,6 +3,7 @@ import { readText } from "@tauri-apps/api/clipboard";
 import * as chrono from "chrono-node";
 import { TextInput, DarkThemeToggle, Flowbite } from "flowbite-react";
 import moment from "moment-timezone";
+import { invoke } from "@tauri-apps/api/tauri";
 
 function App() {
   const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -12,7 +13,12 @@ function App() {
   const [clipboardText, setClipboardText] = useState("");
   const [result, setResult] = useState(localTime);
 
+  let previous_input = "";
+
   function convertDateToTimezone(input: string) {
+    if (input === previous_input) {
+      return;
+    }
     if (input === "") {
       setResult(localTime);
     }
@@ -23,16 +29,15 @@ function App() {
     if (convertedDate) {
       setResult(moment(convertedDate).tz(timezone).format("llll z"));
       setClipboardText(input);
-
+      previous_input = input;
+      invoke("focus_window");
       return true;
     }
   }
 
   async function convertClipboard() {
     await readText().then((text) => {
-      if (text !== "" && text !== clipboardText) {
-        convertDateToTimezone(text!);
-      }
+      convertDateToTimezone(text!);
     });
   }
 
@@ -57,6 +62,7 @@ function App() {
           sizing="md"
           width="w-full"
           onChange={(e) => {
+            console.log(e.target.value);
             setClipboardText(e.target.value);
             convertDateToTimezone(e.target.value);
           }}

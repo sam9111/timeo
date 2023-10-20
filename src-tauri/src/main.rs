@@ -5,6 +5,12 @@
 use tauri::{Manager, SystemTray, SystemTrayEvent, SystemTrayMenu};
 use tauri_plugin_positioner::{Position, WindowExt};
 
+#[tauri::command]
+async fn focus_window(window: tauri::Window) {
+    window.show().unwrap();
+    window.set_focus().unwrap();
+}
+
 fn main() {
     let system_tray_menu = SystemTrayMenu::new();
     tauri::Builder::default()
@@ -28,9 +34,11 @@ fn main() {
                         window.set_focus().unwrap();
                     }
                 }
+
                 _ => {}
             }
         })
+        .invoke_handler(tauri::generate_handler![focus_window])
         .on_window_event(|event| match event.event() {
             tauri::WindowEvent::Focused(is_focused) => {
                 // detect click outside of the focused window and hide the app
