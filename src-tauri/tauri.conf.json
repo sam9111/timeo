@@ -38,13 +38,17 @@
     "security": {
       "csp": null
     },
+    "macOSPrivateApi": true,
     "windows": [
       {
         "fullscreen": false,
-        "resizable": true,
         "title": "timeo",
-        "width": 350,
-        "height": 400
+        "width": 200,
+        "height": 300,
+        "transparent": true,
+        "hiddenTitle": true,
+        "decorations": false,
+        "resizable": false
       }
     ]
   }
