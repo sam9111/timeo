@@ -48,8 +48,13 @@
         "transparent": true,
         "hiddenTitle": true,
         "resizable": false,
-        "focus": true
+        "focus": false,
+        "visible": false
       }
-    ]
+    ],
+    "systemTray": {
+      "iconPath": "icons/icon.png",
+      "iconAsTemplate": true
+    }
   }
 }
