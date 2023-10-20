@@ -44,11 +44,11 @@
         "fullscreen": false,
         "title": "timeo",
         "width": 200,
-        "height": 300,
+        "height": 360,
         "transparent": true,
         "hiddenTitle": true,
-        "decorations": false,
-        "resizable": false
+        "resizable": false,
+        "focus": true
       }
     ]
   }
