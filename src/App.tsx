@@ -51,13 +51,12 @@ function App() {
 
   return (
     <Flowbite>
-      <div className=" items-center mx-auto  p-4  bg-gradient-to-b from-sky-300 to-sky-100  space-y-6 min-h-screen dark:bg-gradient-to-b dark:from-gray-900 dark:to-blue-800 ">
+      <div className=" mx-auto  p-4  bg-gradient-to-b from-sky-300 to-sky-100  space-y-6 min-h-screen dark:bg-gradient-to-b dark:from-gray-900 dark:to-blue-800">
         <div className="flex justify-between items-center  mx-auto">
           <div className="text-2xl font-extrabold  text-white  ">timeo</div>
 
           <DarkThemeToggle />
         </div>
-
         <TextInput
           sizing="md"
           width="w-full"
@@ -69,14 +68,19 @@ function App() {
           value={clipboardText}
           autoFocus
         />
-
         <div className=" text-md font-medium dark:text-white  ">
-          Your time is {result}
+          Your time will be {result}
         </div>
-
         <div className="text-xs text-gray-400">
           Highlight a date and press Cmd/Ctrl + C or type in a date above
         </div>
+
+        <footer className="text-xs text-gray-400 text-center">
+          Built with ❤️ by{" "}
+          <a target="_blank" href="https://twitter.com/samy_uktha">
+            @samy_uktha
+          </a>
+        </footer>
       </div>
     </Flowbite>
   );
