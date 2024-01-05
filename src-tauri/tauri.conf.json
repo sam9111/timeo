@@ -35,18 +35,16 @@
     "security": {
       "csp": null
     },
-    "macOSPrivateApi": true,
+
     "windows": [
       {
         "fullscreen": false,
         "title": "timeo",
         "width": 200,
         "height": 360,
-        "transparent": true,
+
         "hiddenTitle": true,
-        "resizable": false,
-        "focus": false,
-        "visible": false
+        "resizable": false
       }
     ],
     "systemTray": {
